@@ -7,14 +7,14 @@
  ## Product price will be divided by 1,000,000
  ## A new view with cleaned data will be created
  ## Component of cleaned data in cleaned_data view
-	 visitid: the visit id
-	visitorid: website visitor's id
-	ordereddate: ordered date 
-	productsku: id number of product
-	productname: name of product
-	productcategory: category of product
-	productprice:	unit price of product
-	productquantity: ordered quantity of product
+	- visitid: the visit id
+	- visitorid: website visitor's id
+	- ordereddate: ordered date 
+	- productsku: id number of product
+	- productname: name of product
+	- productcategory: category of product
+	- productprice:	unit price of product
+	- productquantity: ordered quantity of product
 
 # Quality Assurance
 
@@ -30,7 +30,7 @@ WHERE	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.t
 
 
 
-#Queries:
+# Queries:
 
 CREATE	VIEW	cleaned_data	AS
 SELECT 	DISTINCT	allsessions.visitorid	AS	visitorid,
