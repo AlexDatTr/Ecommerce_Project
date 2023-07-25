@@ -29,7 +29,7 @@
 
 
 
-# Queries:
+# Queries
 	CREATE	VIEW	cleaned_data	AS
 	SELECT 	DISTINCT	allsessions.visitorid	AS	visitorid,
 						allsessions.visitid	AS	visitid,
@@ -59,8 +59,7 @@
 						WHEN	productname	LIKE	'%Sticker%'	THEN	'Accesories'
 						WHEN	productname	LIKE	'%Sunglasses'	THEN	'Apparel'
 						END	AS	productcategory,
-						CAST(allsessions.productprice AS	float(2))/1000000 AS	productprice,
-						COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int))	AS	productquantity
+						CAST(allsessions.productprice AS	float(2))/1000000 AS	productprice,							COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int))			AS	productquantity
 			
 	FROM	public.allsessions
 	LEFT	JOIN	public.analytics	
@@ -68,8 +67,8 @@
 		AND	allsessions.visitid=analytics.visitid
 		AND	allsessions.productprice=analytics.unitprice
 		
-	WHERE		COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS NOT NULL
-			AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
+	WHERE		COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS				int)) IS NOT NULL
+			AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice				AS	int)) !=0
 			AND	allsessions.city != '(not set)'
 			AND	allsessions.city !=	'not available in demo dataset'
 			AND	allsessions.date <= current_date
