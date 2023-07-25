@@ -72,10 +72,10 @@ Question 8: In what way that visitor have access to the website?
 
 
 ## Challenges 
-# A lot of data in different table of the data is NULL and inconsistent data from different tables of the data set. 
-# Meaning of some attributes are not clear
-# Trouble finding links between tables
+ A lot of data in different table of the data is NULL and inconsistent data from different tables of the data set. 
+ Meaning of some attributes are not clear
+ Trouble finding links between tables
 
 ## Future Goals
-# Clean data for the whole data set
-# Finding other ways to fill up more NULL data
+ Clean data for the whole data set
+ Finding other ways to fill up more NULL data
