@@ -1,6 +1,5 @@
   
-# Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
-
+# Question 1: Which cities and countries have the highest level of transaction revenues on the site?
 
 ## SQL Queries:
 	--top 3 citis with higest revenue
@@ -21,7 +20,6 @@
 	HAVING	SUM(productprice*productquantity) > 0
 	ORDER BY	SUM(productprice*productquantity)	DESC
 	LIMIT 3;
-
 
 ## Answer: The two queries calculated the higest revenue cities and countries by calculate the total revenue(productprice*productquantity) from all the 
  transactions in each city and country
