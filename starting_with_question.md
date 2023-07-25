@@ -29,7 +29,7 @@
 
 
 
-# Question 2: What is the average number of products ordered from visitors in each city and country?**
+# Question 2: What is the average number of products ordered from visitors in each city and country?
 
 
 ## SQL Queries:
@@ -41,7 +41,8 @@
 	FROM	public.cleaned_data
 	ORDER BY	city
 
-## Answer: Calculated by geting the total quatity of product ordered in each city or country and then dividing by the number of visitor. Average number of products ordered from visitors in each city and country:	https://drive.google.com/file/d/1osUZB5lRot-ASERmtSFaqrIuSFGc7W_8/view?usp=drive_link
+## Answer: Calculated by geting the total quatity of product ordered in each city or country and then dividing by the number of visitor.
+## Answer table: Average number of products ordered from visitors in each city and country https://drive.google.com/file/d/1osUZB5lRot-ASERmtSFaqrIuSFGc7W_8/view?usp=drive_link
 	
 
 
@@ -72,8 +73,9 @@
 			totaltransactionpercategory DESC
 	;
 
-## Answer:	
-- The first query generates a table with all the city, different category ordered from each city and the total number of products ordered for each of those categories. The second query generate a table with all the country, different category ordered from each country and the total number of products ordered for each of those categories. From there, we can see that most US city ordered most product in Apparel category, when some of the US city also ordered more product from Nest category; by contrast, there is no significant pattern for city in other country. And when looking at the table from second query, it shows that over 36% of the transaction in the US is in Apparel category, 32% of the transaction in the US is in Nest category, and all other categories only share a small percentage of transaction. Besides, there's no significant pattern recognized from other countries.
+## Answer: The first query generates a table with all the city, different category ordered from each city and the total number of products ordered for each of those categories. The second query generate a table with all the country, different category ordered from each country and the total number of products ordered for each of those categories. From there, we can see that most US city ordered most product in Apparel category, when some of the US city also ordered more product from Nest category; by contrast, there is no significant pattern for city in other country. And when looking at the table from second query, it shows that over 36% of the transaction in the US is in Apparel category, 32% of the transaction in the US is in Nest category, and all other categories only share a small percentage of transaction. Besides, there's no significant pattern recognized from other countries.
+
+## Answer table:
 - Number of transaction in each category in each country:	https://drive.google.com/file/d/1YLL6tbsG-6RI1qnKkeBfpLsqdIa5Xyym/view?usp=drive_link
 - Number of transaction in each category in each city:	https://drive.google.com/file/d/16EcikQ498HZxoQ7oInLwtzwR3gUVizdz/view?usp=sharing
 
@@ -138,8 +140,8 @@
 
 
 
-## Answer: 
-- These two queries calculated the total number of quantity ordered for each product, then filter out the product with highest sale for each city and country. There is no significant pattern spotted for the product sold
+## Answer: These two queries calculated the total number of quantity ordered for each product, then filter out the product with highest sale for each city and country. There is no significant pattern spotted for the product sold
+## Answer table:
 - City and best-selling product:	https://drive.google.com/file/d/14fm9foWEOSihPfhU9weg2UCR04P2D2PN/view?usp=sharing
 - Country and best-selling product:	https://drive.google.com/file/d/15-AiwcpODmhDjb78SrBf-EjGao8zq1Tk/view?usp=sharing
 	
@@ -167,9 +169,8 @@
 
 
 
-## Answer:
-- The querry calculated the total revenue of each city and country, and the total revenue for the dataset, then calculated the ratio of revenue of each city over total revenue for the data set. From the result, we see that the US is accounted for near 89% of the total revenue, Irasel is about 5%, Autralia is just over 3% and the rest is less than 1%.The cites generated the most revenue are Mountain View, San Franisco and Sunnyvale which generates 14.9%, 14.7% and 13.2% respectively
-
+## Answer: The querry calculated the total revenue of each city and country, and the total revenue for the dataset, then calculated the ratio of revenue of each city over total revenue for the data set. From the result, we see that the US is accounted for near 89% of the total revenue, Irasel is about 5%, Autralia is just over 3% and the rest is less than 1%.The cites generated the most revenue are Mountain View, San Franisco and Sunnyvale which generates 14.9%, 14.7% and 13.2% respectively
+## Answer table:
 - City and revenue and ratio of city revenue over total revenue:	https://drive.google.com/file/d/1uH7C2icxt7d8Kom-zdyjshPOo2Jnod9M/view?usp=drive_link
 - Country and revenue and ratio of ccountry revenue over total revenue:	https://drive.google.com/file/d/1MnCG-ZLqmIDYv5XwWQqXqc0Q-slsSTnB/view?usp=sharing
 
