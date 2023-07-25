@@ -1,31 +1,34 @@
   
-**Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
+# Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
 
 
-SQL Queries:
---top 3 citis with higest revenue
-SELECT 	city	AS	city,
+## SQL Queries:
+	--top 3 citis with higest revenue
+	SELECT 	city	AS	city,
 		country	AS	country,
 		SUM(productprice*productquantity) AS	totalcity
-FROM public.cleaned_data
-GROUP BY	city, country
-HAVING	SUM(productprice*productquantity) > 0
-ORDER BY	SUM(productprice*productquantity)	DESC
-LIMIT 3;
+	FROM public.cleaned_data
+	GROUP BY	city, country
+	HAVING	SUM(productprice*productquantity) > 0
+	ORDER BY	SUM(productprice*productquantity)	DESC
+	LIMIT 3;
 
---top 3 countries with higest revenue
-SELECT 	country	AS	country,
+	--top 3 countries with higest revenue
+	SELECT 	country	AS	country,
 		SUM(productprice*productquantity) AS	totalcountry
-FROM public.cleaned_data
-GROUP BY	country
-HAVING	SUM(productprice*productquantity) > 0
-ORDER BY	SUM(productprice*productquantity)	DESC
-LIMIT 3;
+	FROM public.cleaned_data
+	GROUP BY	country
+	HAVING	SUM(productprice*productquantity) > 0
+	ORDER BY	SUM(productprice*productquantity)	DESC
+	LIMIT 3;
 
 
-Answer:	Top 3 citis with higest revenue:	https://drive.google.com/file/d/1nrMftZXLk5HFhYhVbZCBIe8WsZJ2bZxH/view?usp=sharing
-	Top 3 countries with higest revenue:	https://drive.google.com/file/d/1vMrauD8dOD99c6-4YIDWLf3klL7gKQV0/view?usp=sharing
-	The two queries calculated the higest revenue cities and countries by calculate the total revenue(productprice*productquantity) from all the transactions in each city and country
+## Answer: The two queries calculated the higest revenue cities and countries by calculate the total revenue(productprice*productquantity) from all the 
+ transactions in each city and country
+## Answer table:
+- Top 3 citis with higest revenue:	https://drive.google.com/file/d/1nrMftZXLk5HFhYhVbZCBIe8WsZJ2bZxH/view?usp=sharing
+- Top 3 countries with higest revenue:	https://drive.google.com/file/d/1vMrauD8dOD99c6-4YIDWLf3klL7gKQV0/view?usp=sharing
+	   
 
 
 
