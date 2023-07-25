@@ -30,7 +30,7 @@ WHERE	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.t
 
 
 
-Queries:
+#Queries:
 
 CREATE	VIEW	cleaned_data	AS
 SELECT 	DISTINCT	allsessions.visitorid	AS	visitorid,
