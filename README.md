@@ -15,8 +15,10 @@
 
 
 ## Process
+
 ### Explore the data and look for the necessary data to answer the question. Some of the finds are:
-#### The data needed are the city, the country, ordered date, product id, product name, product category, product price, product ordered quantity, the chanel the #### customer get to 		the site
+#### The data needed are the city, the country, ordered date, product id, product name, product category, product price, product ordered quantity, the chanel the customer get to the site
+
 ### Data accessing, cleaning and quality assurance
 #### All the data needed will be collected, cleaned, and quality assured by the querry in cleaning_data.md file
 #### There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by JOIN data from table analytics with the key vitsitor id, visit id, and unit price. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.	
@@ -28,8 +30,8 @@
 #### If the quantity is still NULL or equal 0, don't select the row.
 #### All row with unidentified city and country will not be included in the cleaned data
 #### Ordered date have to be before or equal current date
+
 ### Answering question by writing queries to analyze cleaned data
-	
 
 ## Results
 
