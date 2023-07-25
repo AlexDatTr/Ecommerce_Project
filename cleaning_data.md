@@ -16,17 +16,17 @@
 	productprice:	unit price of product
 	productquantity: ordered quantity of product
 
-Quality Assurance
+# Quality Assurance
 
 -	If the quantity is still NULL or equal 0, don't select the row.  
 -	All row with unidentified city and country will not be included in the cleaned data
 -	Ordered date have to be before or equal current date
 This  WHERE clause will be added to do the above tasks
-WHERE		COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS NOT NULL
-		    AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
-		    AND	allsessions.city != '(not set)'
-		    AND	allsessions.city !=	'not available in demo dataset'
-		    AND	allsessions.date <= current_date
+WHERE	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS 		NOT NULL
+	AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
+	AND	allsessions.city != '(not set)'
+	AND	allsessions.city !=	'not available in demo dataset'
+	AND	allsessions.date <= current_date
 
 
 
