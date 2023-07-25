@@ -21,8 +21,7 @@
 	ORDER BY	SUM(productprice*productquantity)	DESC
 	LIMIT 3;
 
-## Answer: The two queries calculated the higest revenue cities and countries by calculate the total revenue(productprice*productquantity) from all the 
- transactions in each city and country
+## Answer: The two queries calculated the higest revenue cities and countries by calculate the total revenue(productprice*productquantity) from all the transactions in each city and country
 ## Answer table:
 - Top 3 citis with higest revenue:	https://drive.google.com/file/d/1nrMftZXLk5HFhYhVbZCBIe8WsZJ2bZxH/view?usp=sharing
 - Top 3 countries with higest revenue:	https://drive.google.com/file/d/1vMrauD8dOD99c6-4YIDWLf3klL7gKQV0/view?usp=sharing
