@@ -18,7 +18,7 @@ GROUP BY	TO_CHAR(ordereddate,'Month'),EXTRACT(year FROM	ordereddate)
 ORDER BY	monthlyrevenue	DESC
 
 
-Answer: The query calculated the total revenue of every month of the year 2017 - the most recent year by calculated the total of productprice * productquantity group by all the months of 	the year 2017
+Answer: Calculate the most recent year by finding the maximum year - 2017 , then calculate the total of productprice * productquantity group by all the months of the year 			2017
 	Answer table:	https://drive.google.com/file/d/1jg8ati5okACq9cD4DuMD9kTJgwL-5P3O/view?usp=sharing
 
 Question 2: Best selling category by month for most recent year?
@@ -54,7 +54,7 @@ WHERE	cte2.maxcategorysale=cte.categorysale
 ORDER BY	cte.monthnumber
 		
 
-Answer:	The query generate a table  with all the month of the most recent year - 2017 and the best-selling category, and the total product quantity for the category for each month. It 	might help decide which product category should be promoted at which time of the year.
+Answer:	Calculate the most recent year by finding the maximum year - 2017 , then calculate the best-selling category by finding the total product quantity for each category for 		each month of 2017. It might help decide which product category should be promoted at which time of the year.
 	Answer table:	https://drive.google.com/file/d/1gYX43Zhjn3VfIRHFgufffGI9T-jpZXI_/view?usp=sharing
 
 
