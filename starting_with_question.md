@@ -6,7 +6,7 @@
 	SELECT 	city	AS	city,
 		country	AS	country,
 		SUM(productprice*productquantity) AS	totalcity
-	FROM public.cleaned_data
+	FROM public.cleaned_data 
 	GROUP BY	city, country
 	HAVING	SUM(productprice*productquantity) > 0
 	ORDER BY	SUM(productprice*productquantity)	DESC
