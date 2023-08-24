@@ -2,15 +2,15 @@
 
 ## Project/Goals
 
-### To clean the dataset, access necessary data to answer the folling questions.
-### Question 1: Which cities and countries have the highest level of transaction revenues on the site?
-### Question 2: What is the average number of products ordered from visitors in each city and country?
-### Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?
-### Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?
-### Question 5: Can we summarize the impact of revenue generated from each city/country?
-### Question 6: How is the total revenue of the web site break down to month for the most recent year, and the ratio of the month revenue to the year revenue? 
-### Question 7: Best selling category by month for most recent year?
-### Question 8: In what way that visitor have access to the website?
+To clean the dataset, access necessary data to answer the folling questions:
+- Question 1: Which cities and countries have the highest level of transaction revenues on the site?
+- Question 2: What is the average number of products ordered from visitors in each city and country?
+- Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?
+- Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?
+- Question 5: Can we summarize the impact of revenue generated from each city/country?
+- Question 6: How is the total revenue of the web site break down to month for the most recent year, and the ratio of the month revenue to the year revenue? 
+- Question 7: Best selling category by month for most recent year?
+- Question 8: In what way that visitor have access to the website?
 
 
 
