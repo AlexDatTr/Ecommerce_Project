@@ -1,4 +1,5 @@
 ### Question 1: How is the total revenue of the web site break down to month for the most recent year, and the ratio of the month revenue to the year revenue? 
+- Data is access from the cleaned_data table
 - The querry will create a table with these collumn:
 	- mothh: all the month of the most recent year
    	- year: the most recent year
@@ -52,6 +53,7 @@ ORDER BY	monthlyrevenue	DESC
 ![Result table](https://live.staticflickr.com/65535/53150801124_8224b0ac10.jpg)
 
 ### Question 2: Best selling category by month for most recent year?
+- Data is access from the cleaned_data table
 - The most recent year will be selected by this querry
 ```
 SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data
@@ -127,17 +129,32 @@ ORDER BY	cte.monthnumber
 
 
 
-# Question 3: In what way that visitor have access to the website?
-
-## SQL Queries:	
+### Question 3: In what way that visitor have access to the website?
+- Data is access from the allsessions table
+- The total number of visit for each chanel is retrieved by calculated COUNT all the visit for GROUP BY the chanelgrouping collumn
+```
+COUNT(chanelgrouping)	AS	totalchanelgrouping
+```
+- The total number of visit is calculated
+```
+(SELECT	COUNT(*)	FROM	allsessions)::numeric(10,2)
+```
+- Then the ratio between the number of visit for each chanel and the total number of visit is then calculated by this querry
+```
+(COUNT(chanelgrouping)::numeric(10,2)/(SELECT	COUNT(*)	FROM	allsessions)::numeric(10,2) *100)::numeric(10,2)	  AS 		chanelgroupingratio
+```
+- The category is then sorted by the total number of visit in a decendng order
+```
+ORDER BY	COUNT(chanelgrouping)	DESC
+```
+- Final SQL Queries:
+``` 
 	SELECT 	chanelgrouping,
 		COUNT(chanelgrouping)	AS	totalchanelgrouping,
 		(COUNT(chanelgrouping)::numeric(10,2)/(SELECT	COUNT(*)	FROM	allsessions)::numeric(10,2) *100)::numeric(10,2)	  AS 		chanelgroupingratio
 		FROM	allsessions
 		GROUP BY	chanelgrouping
 		ORDER BY	COUNT(chanelgrouping)	DESC
-
-## Answer:	Visitor can access the website from Organic Search, Direct,Referral,Paid Search,Affiliates,Display, and (Other). The query will calculate the total number for each kind of 	accessing the website. Then it will divide that total number for the total number of sessions. From the data and the query, we can see that organic search take up over 57% of the 	way. Then Dirrect and Refferal is a bit smaller number with only 19.8 and 17,05 percent. And the rest of the chanel just take a small percentage of the total
-## Answer table:	https://drive.google.com/file/d/1iI07Khm05jyfwMvRKP1sk-cUH1dolPGG/view?usp=drive_link
-
+```
+![Result Table](https://www.flickr.com/photos/199030492@N02/53151163693/in/dateposted-public/)
 
