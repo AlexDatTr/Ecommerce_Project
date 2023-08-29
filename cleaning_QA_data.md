@@ -8,9 +8,17 @@
 	AND	allsessions.visitid=analytics.visitid
 	AND	allsessions.productprice=analytics.unitprice
    ```
- - For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.
- - All product price will be assumed as the productprice column in public.allsessions column
+ - All product price will be assumed as the productprice column in public.allsessions column. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table. In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions. This is the SELECT querry for the productquantity
+   ``` 
+   COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int))			AS	productquantity
+   ```
  - There is some row in the allsession table that have city in the wrong country, so country will be change for those row.
+   ```
+	CASE
+	WHEN	city='New York'	THEN	CAST('United States' AS varchar(100))
+	ELSE	allsessions.country	
+	END	AS	country,
+   ```
  - Product category column in allsession table is unclear so it will be formated to only contain the category name
  - Product price will be divided by 1,000,000
  - A new view with cleaned data will be created
@@ -80,7 +88,7 @@ SELECT 	DISTINCT	allsessions.visitorid	AS	visitorid,
 			WHEN	productname	LIKE	'%Sticker%'	THEN	'Accesories'
 			WHEN	productname	LIKE	'%Sunglasses'	THEN	'Apparel'
 			END	AS	productcategory,
-			CAST(allsessions.productprice AS	float(2))/1000000 AS	productprice,								COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int))			AS	productquantity
+			CAST(allsessions.productprice AS	float(2))/1000000 AS	productprice,											COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int))			AS	productquantity
 			
 FROM	public.allsessions
 LEFT	JOIN	public.analytics	
