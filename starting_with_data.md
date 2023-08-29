@@ -94,7 +94,7 @@ JOIN	cte2	ON	cte.month=cte2.month
 WHERE	cte2.maxcategorysale=cte.categorysale
 ORDER BY	cte.monthnumber
 ```
--Final SQL Queries:	
+- Final SQL Queries:	
 ```
 WITH cte	AS(
 SELECT	EXTRACT(month FROM	ordereddate)	AS	monthnumber,
