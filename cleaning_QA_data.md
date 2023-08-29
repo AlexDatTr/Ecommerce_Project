@@ -17,7 +17,7 @@
 	- productquantity: ordered quantity of product
 
 ### Quality Assurance
-If the quantity is still NULL or equal 0, don't select the row. A WHERE clause is used to adress this problem
+If the quantity is still NULL or equal 0, don't select the row. A WHERE clause with COALESCE is used to adress this problem. The query attempt to get the not null value from either the product quantity collumn, the unit sold collumn, or by dividing the total transaction revenue by the productprice. Then check if that value is NULL
 ```
 WHERE COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
 ```
