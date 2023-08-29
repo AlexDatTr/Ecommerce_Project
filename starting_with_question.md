@@ -95,21 +95,20 @@ ORDER BY	city
 ### Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
 
 - To count number of transaction in each category in each city
-
+- The 
 - Final SQL Queries:
 ```
-	--To count number of transaction in each category in each city
-	SELECT	country,
+SELECT	country,
+	city,
+	productcategory,
+	COUNT(productcategory)	AS	totaltransactionpercategory
+FROM	public.cleaned_data
+GROUP BY	city,country,productcategory
+ORDER BY	country,
 		city,
-		productcategory,
-		COUNT(productcategory)	AS	totaltransactionpercategory
-	FROM	public.cleaned_data
-	GROUP BY	city,country,productcategory
-	ORDER BY	country,
-			city,
-			totaltransactionpercategory	DESC
-	;
-
+		totaltransactionpercategory	DESC
+;
+```
 	--To count number of transaction in each category in each country			
 	SELECT	country,
 		productcategory,
