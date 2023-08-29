@@ -1,22 +1,53 @@
-# Question 1: How is the total revenue of the web site break down to month for the most recent year, and the ratio of the month revenue to the year revenue? 
-
-## SQL Queries:	
-
-
-	SELECT 	TO_CHAR(ordereddate,'Month')	AS	month,
-		EXTRACT(year FROM	ordereddate)	AS year,
-		SUM(productquantity*productprice)::float(2)	AS monthlyrevenue,
-		SUM(productquantity*productprice)/
-		(
-			SELECT	SUM(productquantity*productprice)
-			FROM	public.cleaned_data
-			WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
-		)*100	::	float(2)	AS	revenueratio
-	FROM	public.cleaned_data
-	WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
-	GROUP BY	TO_CHAR(ordereddate,'Month'),EXTRACT(year FROM	ordereddate)
-	ORDER BY	monthlyrevenue	DESC
-
+### Question 1: How is the total revenue of the web site break down to month for the most recent year, and the ratio of the month revenue to the year revenue? 
+- The querry will create a table with these collumn:
+	- mothh: all the month of the most recent year
+   	- year: the most recent year
+   	- monthlyrevenue:  monthly revenue for each month of the most recent year
+   	- revenueratio: ratio of monthly revenue for each month compare to the most recent year
+- The most recent year will be selected by this querry
+```
+SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data
+```
+- The monthly revenue for each month of the most recent year is calculated in the SELECT clause
+```
+SUM(productquantity*productprice)::float(2)	AS monthlyrevenue
+```
+- The total revenue of the most recent year is calculated
+```
+SELECT	SUM(productquantity*productprice)
+FROM	public.cleaned_data
+WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
+```
+- The ratio is then calculated by this querry
+```
+SUM(productquantity*productprice)/
+	(
+		SELECT	SUM(productquantity*productprice)
+		FROM	public.cleaned_data
+		WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
+	)*100	::	float(2)	AS	revenueratio
+```
+- The GROUP BY is used to group all the revenue for the sum by month and year, and then sort the result by monthly revenue
+```
+GROUP BY	TO_CHAR(ordereddate,'Month'),EXTRACT(year FROM	ordereddate)
+ORDER BY	monthlyrevenue	DESC
+```
+- Final SQL Queries:	
+```
+SELECT 	TO_CHAR(ordereddate,'Month')	AS	month,
+	EXTRACT(year FROM	ordereddate)	AS year,
+	SUM(productquantity*productprice)::float(2)	AS monthlyrevenue,
+	SUM(productquantity*productprice)/
+	(
+		SELECT	SUM(productquantity*productprice)
+		FROM	public.cleaned_data
+		WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
+	)*100	::	float(2)	AS	revenueratio
+FROM	public.cleaned_data
+WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
+GROUP BY	TO_CHAR(ordereddate,'Month'),EXTRACT(year FROM	ordereddate)
+ORDER BY	monthlyrevenue	DESC
+```
 
 ## Answer: Calculate the most recent year by finding the maximum year - 2017 , then calculate the total of productprice * productquantity group by all the months of the year 2017
 ## Answer table:	https://drive.google.com/file/d/1jg8ati5okACq9cD4DuMD9kTJgwL-5P3O/view?usp=sharing
