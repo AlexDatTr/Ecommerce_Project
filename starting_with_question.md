@@ -92,11 +92,12 @@ ORDER BY	city
 	
 
 
-# Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
+### Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
 
+- To count number of transaction in each category in each city
 
-## SQL Queries:
-
+- Final SQL Queries:
+```
 	--To count number of transaction in each category in each city
 	SELECT	country,
 		city,
@@ -118,7 +119,7 @@ ORDER BY	city
 	ORDER BY	country,
 			totaltransactionpercategory DESC
 	;
-
+```
 ## Answer: The first query generates a table with all the city, different category ordered from each city and the total number of products ordered for each of those categories. The second query generate a table with all the country, different category ordered from each country and the total number of products ordered for each of those categories. From there, we can see that most US city ordered most product in Apparel category, when some of the US city also ordered more product from Nest category; by contrast, there is no significant pattern for city in other country. And when looking at the table from second query, it shows that over 36% of the transaction in the US is in Apparel category, 32% of the transaction in the US is in Nest category, and all other categories only share a small percentage of transaction. Besides, there's no significant pattern recognized from other countries.
 
 ## Answer table:
