@@ -1,26 +1,43 @@
   
-# Question 1: Which cities and countries have the highest level of transaction revenues on the site?
+### Question 1: Which cities and countries have the highest level of transaction revenues on the site?
 
-## SQL Queries:
-	--top 3 citis with higest revenue
-	SELECT 	city	AS	city,
-		country	AS	country,
-		SUM(productprice*productquantity) AS	totalcity
-	FROM public.cleaned_data 
-	GROUP BY	city, country
-	HAVING	SUM(productprice*productquantity) > 0
-	ORDER BY	SUM(productprice*productquantity)	DESC
-	LIMIT 3;
+#### Top 3 citis with higest revenue
+- The total revenue of each city will be calculated all the priduct price * product quantity for all the transaction made in that city, which is the following  in the SELECT clause
+```
+ SUM(productprice*productquantity) AS	totalcity
+```
+- The above SUM is then group by city and country to get the total revenue for each city
+```
+GROUP BY	city, country
+```
+- The result then get sorted by the total revenue in decending order. And only 3 biggest value are selected
+``` 
+ORDER BY	SUM(productprice*productquantity)	DESC
+LIMIT 3;
+```
+- Final SQL querry:
+```
+SELECT 	city	AS	city,
+	country	AS	country,
+	SUM(productprice*productquantity) AS	totalcity
+FROM public.cleaned_data 
+GROUP BY	city, country
+ORDER BY	SUM(productprice*productquantity)	DESC
+LIMIT 3;
+```
+![Result table](https://combo.staticflickr.com/pw/images/spaceout.gif)
 
-	--top 3 countries with higest revenue
-	SELECT 	country	AS	country,
-		SUM(productprice*productquantity) AS	totalcountry
-	FROM public.cleaned_data
-	GROUP BY	country
-	HAVING	SUM(productprice*productquantity) > 0
-	ORDER BY	SUM(productprice*productquantity)	DESC
-	LIMIT 3;
 
+#### top 3 countries with higest revenue
+```
+SELECT 	country	AS	country,
+	SUM(productprice*productquantity) AS	totalcountry
+FROM public.cleaned_data
+GROUP BY	country
+HAVING	SUM(productprice*productquantity) > 0
+ORDER BY	SUM(productprice*productquantity)	DESC
+LIMIT 3;
+```
 ## Answer: The two queries calculated the higest revenue cities and countries by calculate the total revenue(productprice*productquantity) from all the transactions in each city and country
 ## Answer table:
 - Top 3 citis with higest revenue:	https://drive.google.com/file/d/1nrMftZXLk5HFhYhVbZCBIe8WsZJ2bZxH/view?usp=sharing
