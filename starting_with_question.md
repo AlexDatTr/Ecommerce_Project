@@ -25,7 +25,8 @@ GROUP BY	city, country
 ORDER BY	SUM(productprice*productquantity)	DESC
 LIMIT 3;
 ```
-![Result table](https://combo.staticflickr.com/pw/images/spaceout.gif)
+
+!['Result table'](https://combo.staticflickr.com/pw/images/spaceout.gif)
 
 
 #### top 3 countries with higest revenue
