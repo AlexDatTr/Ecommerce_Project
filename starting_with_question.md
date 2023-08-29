@@ -62,7 +62,23 @@ LIMIT 3;
 ### Question 2: What is the average number of products ordered from visitors in each city and country?
 
 - Data is accessed from cleaned_data table
-- 
+- First, the total sale for each city is calculated by getting the total of product quantity for each city in the SELECT clause
+```
+SUM(productquantity)	OVER(PARTITION BY	city)
+```
+- Then the total number of visitor is calculated by getting the total count of distinct visitor
+```
+COUNT(DISTINCT	visitorid)	OVER(PARTITION BY	city)
+```
+- Then the average number of products ordered from visitors for each city is calculated by dividing the total sale/total visitor
+```
+SUM(productquantity)	OVER(PARTITION BY	city)/COUNT(DISTINCT	visitorid)	OVER(PARTITION BY	city) AS	avgproductbycity,
+```
+- The same logic apply to country, then we have this following query for the average number of products ordered from visitors in each city and country
+```
+SUM(productquantity)	OVER(PARTITION BY	country)/COUNT(DISTINCT	visitorid)	OVER(PARTITION BY	country) AS	avgproductbycountry
+```
+- The DISTINCT is used in the SELECT clause to only pick the unique city and visitor id, and the order is softed by city
 - Final SQL Queries:
 ```
 SELECT 	DISTINCT	city,
@@ -72,7 +88,7 @@ SELECT 	DISTINCT	city,
 FROM	public.cleaned_data
 ORDER BY	city
 ```
-## Answer table: Average number of products ordered from visitors in each city and country https://drive.google.com/file/d/1osUZB5lRot-ASERmtSFaqrIuSFGc7W_8/view?usp=drive_link
+![Result table](https://live.staticflickr.com/65535/53151287620_ed07c150ae_m.jpg)
 	
 
 
