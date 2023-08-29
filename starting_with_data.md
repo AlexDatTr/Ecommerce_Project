@@ -156,4 +156,5 @@ ORDER BY	COUNT(chanelgrouping)	DESC
 		GROUP BY	chanelgrouping
 		ORDER BY	COUNT(chanelgrouping)	DESC
 ```
+
 ![Result Table](https://www.flickr.com/photos/199030492@N02/53151163693/in/dateposted-public/)
