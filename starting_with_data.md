@@ -51,41 +51,79 @@ ORDER BY	monthlyrevenue	DESC
 
 ![Result table](https://live.staticflickr.com/65535/53150801124_8224b0ac10.jpg)
 
-# Question 2: Best selling category by month for most recent year?
+### Question 2: Best selling category by month for most recent year?
+- The most recent year will be selected by this querry
+```
+SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data
+```
+- The cte is create to extract the month in number, the month, the year, product category, and calculated the total product sold for each product category for each month of the most recent year
+```
+WITH cte	AS(
+SELECT	EXTRACT(month FROM	ordereddate)	AS	monthnumber,
+	TO_CHAR(ordereddate,'Month') AS month,
+	EXTRACT(year FROM	ordereddate)	AS year,
+	productcategory,
+	SUM(productquantity)	categorysale
+FROM	public.cleaned_data
+WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
+GROUP BY	EXTRACT(month FROM	ordereddate),
+		TO_CHAR(ordereddate,'Month'),
+		EXTRACT(year FROM	ordereddate),
+		productcategory
+),
+```
+- The cte2 is create to find the category that have the most sale for each month of the most recent year
+```
+cte2	AS(
+SELECT	month,
+	MAX(categorysale)	AS	maxcategorysale
+FROM	cte
+GROUP BY	month
+)
+```
+- Then both cte and cte2 is inner join by the month and filter the results to get only the category with the best total sale. The result is then sorted by month
+```
+SELECT	cte.month,
+	cte.year,
+	cte.productcategory,
+	cte.categorysale
+FROM	cte
+JOIN	cte2	ON	cte.month=cte2.month
+WHERE	cte2.maxcategorysale=cte.categorysale
+ORDER BY	cte.monthnumber
+```
+-Final SQL Queries:	
+```
+WITH cte	AS(
+SELECT	EXTRACT(month FROM	ordereddate)	AS	monthnumber,
+	TO_CHAR(ordereddate,'Month') AS month,
+	EXTRACT(year FROM	ordereddate)	AS year,
+	productcategory,
+	SUM(productquantity)	categorysale
+FROM	public.cleaned_data
+WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
+GROUP BY	EXTRACT(month FROM	ordereddate),
+		TO_CHAR(ordereddate,'Month'),
+		EXTRACT(year FROM	ordereddate),
+		productcategory
+),
+cte2	AS(
+SELECT	month,
+	MAX(categorysale)	AS	maxcategorysale
+FROM	cte
+GROUP BY	month
+)
+SELECT	cte.month,
+	cte.year,
+	cte.productcategory,
+	cte.categorysale
+FROM	cte
+JOIN	cte2	ON	cte.month=cte2.month
+WHERE	cte2.maxcategorysale=cte.categorysale
+ORDER BY	cte.monthnumber
+```		
 
-## SQL Queries:	
-
-	WITH cte	AS(
-	SELECT	EXTRACT(month FROM	ordereddate)	AS	monthnumber,
-			TO_CHAR(ordereddate,'Month') AS month,
-			EXTRACT(year FROM	ordereddate)	AS year,
-			productcategory,
-			SUM(productquantity)	categorysale
-	FROM	public.cleaned_data
-	WHERE	EXTRACT(year FROM	ordereddate) = (SELECT	MAX(EXTRACT(year FROM	ordereddate))	FROM	public.cleaned_data)
-	GROUP BY	EXTRACT(month FROM	ordereddate),
-				TO_CHAR(ordereddate,'Month'),
-				EXTRACT(year FROM	ordereddate),
-				productcategory
-	),
-	cte2	AS(
-	SELECT	month,
-			MAX(categorysale)	AS	maxcategorysale
-	FROM	cte
-	GROUP BY	month
-	)
-	SELECT	cte.month,
-		cte.year,
-		cte.productcategory,
-		cte.categorysale
-	FROM	cte
-	JOIN	cte2	ON	cte.month=cte2.month
-	WHERE	cte2.maxcategorysale=cte.categorysale
-	ORDER BY	cte.monthnumber
-		
-
-## Answer:	Calculate the most recent year by finding the maximum year - 2017 , then calculate the best-selling category by finding the total product quantity for each category for 		each month of 2017. It might help decide which product category should be promoted at which time of the year.
-## Answer table:	https://drive.google.com/file/d/1gYX43Zhjn3VfIRHFgufffGI9T-jpZXI_/view?usp=sharing
+![Answer table](https://live.staticflickr.com/65535/53151062710_9bb28ab23b.jpg)
 
 
 
