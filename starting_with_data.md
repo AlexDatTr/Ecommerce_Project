@@ -157,4 +157,4 @@ ORDER BY	COUNT(chanelgrouping)	DESC
 		ORDER BY	COUNT(chanelgrouping)	DESC
 ```
 
-![Result Table](https://flic.kr/p/2oYK5YS)
+![Result Table](https://live.staticflickr.com/65535/53151115645_957bc97e67_m.jpg)
