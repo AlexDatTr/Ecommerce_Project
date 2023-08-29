@@ -49,8 +49,7 @@ GROUP BY	TO_CHAR(ordereddate,'Month'),EXTRACT(year FROM	ordereddate)
 ORDER BY	monthlyrevenue	DESC
 ```
 
-## Answer: Calculate the most recent year by finding the maximum year - 2017 , then calculate the total of productprice * productquantity group by all the months of the year 2017
-## Answer table:	https://drive.google.com/file/d/1jg8ati5okACq9cD4DuMD9kTJgwL-5P3O/view?usp=sharing
+![Result table](https://drive.google.com/file/d/1jg8ati5okACq9cD4DuMD9kTJgwL-5P3O/view?usp=sharing)
 
 # Question 2: Best selling category by month for most recent year?
 
