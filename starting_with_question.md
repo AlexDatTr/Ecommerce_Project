@@ -2,6 +2,7 @@
 ### Question 1: Which cities and countries have the highest level of transaction revenues on the site?
 
 #### Top 3 citis with higest revenue
+- Data is accessed from cleaned_data table
 - The total revenue of each city will be calculated all the priduct price * product quantity for all the transaction made in that city, which is the following  in the SELECT clause
 ```
  SUM(productprice*productquantity) AS	totalcity
@@ -29,37 +30,48 @@ LIMIT 3;
 !['Result table'](https://live.staticflickr.com/65535/53151001069_18e4a63a68_w.jpg)
 
 
-#### top 3 countries with higest revenue
+#### Top 3 countries with higest revenue
+- Data is accessed from cleaned_data table
+- The total revenue of each city will be calculated all the priduct price * product quantity for all the transaction made in that country, which is the following  in the SELECT clause
+```
+ SUM(productprice*productquantity) AS	totalcountry
+```
+- The above SUM is then group by city and country to get the total revenue for each country
+```
+GROUP BY	country
+```
+- The result then get sorted by the total revenue in decending order. And only 3 biggest value are selected
+``` 
+ORDER BY	SUM(productprice*productquantity)	DESC
+LIMIT 3;
+```
+- Final SQL querry:
 ```
 SELECT 	country	AS	country,
 	SUM(productprice*productquantity) AS	totalcountry
 FROM public.cleaned_data
 GROUP BY	country
-HAVING	SUM(productprice*productquantity) > 0
 ORDER BY	SUM(productprice*productquantity)	DESC
 LIMIT 3;
 ```
-## Answer: The two queries calculated the higest revenue cities and countries by calculate the total revenue(productprice*productquantity) from all the transactions in each city and country
-## Answer table:
-- Top 3 citis with higest revenue:	https://drive.google.com/file/d/1nrMftZXLk5HFhYhVbZCBIe8WsZJ2bZxH/view?usp=sharing
-- Top 3 countries with higest revenue:	https://drive.google.com/file/d/1vMrauD8dOD99c6-4YIDWLf3klL7gKQV0/view?usp=sharing
+!['Result table'](https://live.staticflickr.com/65535/53150232717_a7a0310598_m.jpg)
 	   
 
 
 
-# Question 2: What is the average number of products ordered from visitors in each city and country?
+### Question 2: What is the average number of products ordered from visitors in each city and country?
 
-
-## SQL Queries:
-
-	SELECT 	DISTINCT	city,
-		SUM(productquantity)	OVER(PARTITION BY	city)/COUNT(DISTINCT	visitorid)	OVER(PARTITION BY	city) AS	avgproductbycity,
-		country,
-		SUM(productquantity)	OVER(PARTITION BY	country)/COUNT(DISTINCT	visitorid)	OVER(PARTITION BY	country) AS	avgproductbycountry
-	FROM	public.cleaned_data
-	ORDER BY	city
-
-## Answer: Calculated by geting the total quatity of product ordered in each city or country and then dividing by the number of visitor.
+- Data is accessed from cleaned_data table
+- 
+- Final SQL Queries:
+```
+SELECT 	DISTINCT	city,
+	SUM(productquantity)	OVER(PARTITION BY	city)/COUNT(DISTINCT	visitorid)	OVER(PARTITION BY	city) AS	avgproductbycity,
+	country,
+	SUM(productquantity)	OVER(PARTITION BY	country)/COUNT(DISTINCT	visitorid)	OVER(PARTITION BY	country) AS	avgproductbycountry
+FROM	public.cleaned_data
+ORDER BY	city
+```
 ## Answer table: Average number of products ordered from visitors in each city and country https://drive.google.com/file/d/1osUZB5lRot-ASERmtSFaqrIuSFGc7W_8/view?usp=drive_link
 	
 
