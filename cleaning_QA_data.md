@@ -31,6 +31,7 @@ AND	allsessions.date <= current_date
 ```
 
 #### Final Data Cleaning and QA Queries
+```
 CREATE	VIEW	cleaned_data	AS
 SELECT 	DISTINCT	allsessions.visitorid	AS	visitorid,
 			allsessions.visitid	AS	visitid,
