@@ -1,6 +1,14 @@
 ### What issues will you address by cleaning the data?
 
- - There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by JOIN data from table analytics with the key vitsitor id, visit id, and unit price. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.	
+ - There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by LEFT JOIN data from table analytics with the key vitsitor id, visit id, and product price. It is assumed that the data from the product quantity is the primary data, so a LEFT JOIN is used to keep all the data from the product quantity collumn.
+   ```
+   FROM	public.allsessions
+	LEFT	JOIN	public.analytics	
+	ON	allsessions.visitorid=analytics.visitorid
+	AND	allsessions.visitid=analytics.visitid
+	AND	allsessions.productprice=analytics.unitprice
+   ```
+ - For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.
  - All product price will be assumed as the productprice column in public.allsessions column
  - There is some row in the allsession table that have city in the wrong country, so country will be change for those row.
  - Product category column in allsession table is unclear so it will be formated to only contain the category name
