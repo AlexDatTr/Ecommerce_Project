@@ -1,12 +1,12 @@
-# What issues will you address by cleaning the data?
+### What issues will you address by cleaning the data?
 
- ## There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by JOIN data from table analytics with the key vitsitor id, visit id, and unit price. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.	
- ## All product price will be assumed as the productprice column in public.allsessions column
- ## There is some row in the allsession table that have city in the wrong country, so country will be change for those row.
- ## Product category column in allsession table is unclear so it will be formated to only contain the category name
- ## Product price will be divided by 1,000,000
- ## A new view with cleaned data will be created
- ## Component of cleaned data in cleaned_data view
+ #### There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by JOIN data from table analytics with the key vitsitor id, visit id, and unit price. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.	
+ #### All product price will be assumed as the productprice column in public.allsessions column
+ #### There is some row in the allsession table that have city in the wrong country, so country will be change for those row.
+ #### Product category column in allsession table is unclear so it will be formated to only contain the category name
+ #### Product price will be divided by 1,000,000
+ #### A new view with cleaned data will be created
+ #### Component of cleaned data in cleaned_data view
 	- visitid: the visit id
 	- visitorid: website visitor's id
 	- ordereddate: ordered date 
@@ -16,11 +16,11 @@
 	- productprice:	unit price of product
 	- productquantity: ordered quantity of product
 
-# Quality Assurance
-## If the quantity is still NULL or equal 0, don't select the row.  
-## All row with unidentified city and country will not be included in the cleaned data
-## Ordered date have to be before or equal current date
-## This  WHERE clause will be added to do the above tasks
+### Quality Assurance
+#### If the quantity is still NULL or equal 0, don't select the row.  
+#### All row with unidentified city and country will not be included in the cleaned data
+#### Ordered date have to be before or equal current date
+#### This  WHERE clause will be added to do the above tasks
 	WHERE	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS 		NOT NULL
 	AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
 	AND	allsessions.city != '(not set)'
