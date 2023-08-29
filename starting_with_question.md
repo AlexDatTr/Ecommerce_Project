@@ -26,7 +26,7 @@ ORDER BY	SUM(productprice*productquantity)	DESC
 LIMIT 3;
 ```
 
-!['Result table'](https://combo.staticflickr.com/pw/images/spaceout.gif)
+!['Result table'](https://live.staticflickr.com/65535/53151001069_18e4a63a68_w.jpg)
 
 
 #### top 3 countries with higest revenue
