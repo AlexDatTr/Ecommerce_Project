@@ -17,13 +17,21 @@
 	- productquantity: ordered quantity of product
 
 ### Quality Assurance
-If the quantity is still NULL or equal 0, don't select the row. A WHERE clause with COALESCE is used to adress this problem. The query attempt to get the not null value from either the product quantity collumn, the unit sold collumn, or by dividing the total transaction revenue by the productprice. Then check if that value is NULL
+- If the quantity is still NULL or equal 0, don't select the row. A WHERE clause with COALESCE is used to adress this problem. The query attempt to get the not null value from either the product quantity collumn, the unit sold collumn, or by dividing the total transaction revenue by the productprice. Then check if that value is NULL or equal 0
 ```
-WHERE COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
+WHERE 	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS NOT NULL
+	AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
 ```
-All row with unidentified city and country will not be included in the cleaned data
-#### Ordered date have to be before or equal current date
-#### This  WHERE clause will be added to do the above tasks
+- All row with unidentified city and country will not be included in the cleaned data. Another condition will be add to the previous WHERE clause to deal with this problem
+```
+AND	allsessions.city !=	'(not set)'
+AND	allsessions.city !=	'not available in demo dataset'
+```
+- Ordered date have to be before or equal current date. Another condition will be add to the previous WHERE clause to deal with this problem
+```
+AND	allsessions.date <= current_date
+```
+- This summary WHERE clause will be used to do all the above tasks
 ```
 WHERE	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS NOT NULL
 AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
