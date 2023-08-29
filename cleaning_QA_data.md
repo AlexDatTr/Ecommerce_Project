@@ -1,5 +1,8 @@
 ### What issues will you address by cleaning the data?
-
+ - A new view with cleaned data will be created
+```
+CREATE	VIEW	cleaned_data	AS
+```
  - There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by LEFT JOIN data from table analytics with the key vitsitor id, visit id, and product price. It is assumed that the data from the product quantity is the primary data, so a LEFT JOIN is used to keep all the data from the product quantity collumn.
    ```
    FROM	public.allsessions
@@ -20,8 +23,30 @@
 	END	AS	country,
    ```
  - Product category column in allsession table is unclear so it will be formated to only contain the category name
+```
+CASE	
+			WHEN	productcategory	LIKE	'%Nest%'	OR	productname	LIKE	'%Nest%'	THEN	'Nest'
+			WHEN	productcategory	LIKE	'%Apparel%'	OR	productname	LIKE	'%Men%'	
+									OR	productname	LIKE	'%Women%'
+									OR	productname	LIKE	'%Men%'		THEN	'Apparel'
+			WHEN	productcategory	LIKE	'%Accessories%'	THEN	'Accesories'
+			WHEN	productname	LIKE	'%Android Lunch Kit%'	THEN	'Houseware'
+			WHEN	productname	LIKE	'%Android 17oz Stainless Steel Sport Bottle%'	THEN	'Drinkware'
+			WHEN	productcategory	LIKE	'%Drinkware%'	THEN	'Drinkware'
+			WHEN	productcategory	LIKE	'%Office%'	THEN	'Office'
+			WHEN	productcategory	LIKE	'%Housewares%'	THEN	'Houseware'
+			WHEN	productcategory	LIKE	'%Bags%'	THEN	'Bags'	
+			WHEN	productcategory	LIKE	'%Lifestyle%'	THEN	'Lifestyle'	
+			WHEN	productname	LIKE	'%Notebook%'	THEN	'Office'
+			WHEN	productname	LIKE	'%Waze%'	THEN	'Waze'
+			WHEN	productname	LIKE	'%Sticker%'	THEN	'Accesories'
+			WHEN	productname	LIKE	'%Sunglasses'	THEN	'Apparel'
+			END	AS	productcategory
+```
  - Product price will be divided by 1,000,000
- - A new view with cleaned data will be created
+```
+CAST(allsessions.productprice AS	float(2))/1000000 AS	productprice
+```
  - Component of cleaned data in cleaned_data view
 	- visitid: the visit id
 	- visitorid: website visitor's id
