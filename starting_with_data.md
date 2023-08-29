@@ -49,7 +49,7 @@ GROUP BY	TO_CHAR(ordereddate,'Month'),EXTRACT(year FROM	ordereddate)
 ORDER BY	monthlyrevenue	DESC
 ```
 
-![Result table](https://drive.google.com/file/d/1jg8ati5okACq9cD4DuMD9kTJgwL-5P3O/view?usp=sharing)
+![Result table](https://drive.google.com/file/d/1Q8bZwjYKGwWRtecJJYnxr_WwI2wXx4so/view?usp=drive_link)
 
 # Question 2: Best selling category by month for most recent year?
 
