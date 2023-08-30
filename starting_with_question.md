@@ -289,7 +289,8 @@ SELECT		cte.country,
 ![Result table](https://live.staticflickr.com/65535/53151937465_aeb0d68b34_m.jpg)
 
 
-### Question 5: Can we summarize the impact of revenue generated from each city/country?**
+### **Question 5: Can we summarize the impact of revenue generated from each city/country?**
+
 
 - Final SQL Queries:
 
