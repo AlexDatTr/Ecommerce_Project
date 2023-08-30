@@ -92,7 +92,7 @@ ORDER BY	city
 	
 
 
-### Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
+### Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?
 
 #### To count number of transaction in each category in each city
 - Data is accessd from public.cleaned_data table
@@ -156,7 +156,7 @@ ORDER BY	country,
 
 ![Result table](https://live.staticflickr.com/65535/53151957013_713c822177_m.jpg)
 
-### Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
+### Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?
 
 #### City and best-selling product
 - Data is accessd from public.cleaned_data table
@@ -289,31 +289,63 @@ SELECT		cte.country,
 ![Result table](https://live.staticflickr.com/65535/53151937465_aeb0d68b34_m.jpg)
 
 
-### **Question 5: Can we summarize the impact of revenue generated from each city/country?**
+### ** Question 5: Can we summarize the impact of revenue generated from each city/country? **
 
+#### City and revenue and ratio of city revenue over total revenue
+- Data is accessd from public.cleaned_data table
+- The total revenue of the company is calculated
+```
+SELECT SUM(productquantity*productprice)AS	FROM	public.cleaned_data
+```
 
+- The total revenue of a city is calculated by getting the SUM of all productquantity*productprice GROUP BY city,country. Then the result is cast to float(2)
+```
+SUM(productquantity*productprice)	AS	float(2)
+``` 
+- The ratio between the revenue of the city and the total revenue of the company is calculated in the SELECTED clause, then that collumn is named revenueratio
+```
+CAST(SUM(productquantity*productprice)/(SELECT SUM(productquantity*productprice)	FROM	public.cleaned_data)*100 AS 	float(2)) AS	revenueratio
+```
+- The result is then sorted by the ratio in decending order
+```
+ORDER BY	revenueratio DESC
+```
 - Final SQL Queries:
+```
+SELECT	DISTINCT	city, country,
+	CAST(SUM(productquantity*productprice)	AS	float(2)) AS	cityrevenue,
+	CAST(SUM(productquantity*productprice)/(SELECT SUM(productquantity*productprice)	FROM	public.cleaned_data)*100 AS 	float(2)) AS	revenueratio
+FROM	public.cleaned_data	
+GROUP BY	city,country
+ORDER BY	revenueratio DESC
+```
+![Result table](https://live.staticflickr.com/65535/53150950957_1162834a54_m.jpg)
 
-	-- city and revenue and ratio of city revenue over total revenue
-	SELECT	DISTINCT	city, country,
-		CAST(SUM(productquantity*productprice)	AS	float(2)) AS	cityrevenue,
-		CAST(SUM(productquantity*productprice)/(SELECT SUM(productquantity*productprice)AS	totalrevenue	FROM	public.cleaned_data)*100 AS 	float(2)) AS	revenueratio
-	FROM	public.cleaned_data	
-	GROUP BY	city,country
-	ORDER BY	revenueratio DESC
-	-- country and revenue and ratio of ccountry revenue over total revenue
-	SELECT	DISTINCT	country,
-		CAST(SUM(productquantity*productprice)	AS	float(2)) AS	countryrevenue,
-		CAST(SUM(productquantity*productprice)/(SELECT SUM(productquantity*productprice)AS	totalrevenue	FROM	public.cleaned_data)*100 AS float(2)) AS	revenueratio
-	FROM	public.cleaned_data	
-	GROUP BY	country
-	ORDER BY	revenueratio DESC
-
-
-
-## Answer: The querry calculated the total revenue of each city and country, and the total revenue for the dataset, then calculated the ratio of revenue of each city over total revenue for the data set. From the result, we see that the US is accounted for near 89% of the total revenue, Irasel is about 5%, Autralia is just over 3% and the rest is less than 1%.The cites generated the most revenue are Mountain View, San Franisco and Sunnyvale which generates 14.9%, 14.7% and 13.2% respectively
-## Answer table:
-- City and revenue and ratio of city revenue over total revenue:	https://drive.google.com/file/d/1uH7C2icxt7d8Kom-zdyjshPOo2Jnod9M/view?usp=drive_link
-- Country and revenue and ratio of ccountry revenue over total revenue:	https://drive.google.com/file/d/1MnCG-ZLqmIDYv5XwWQqXqc0Q-slsSTnB/view?usp=sharing
-
-
+#### country and revenue and ratio of ccountry revenue over total revenue
+- Data is accessd from public.cleaned_data table
+- The total revenue of the company is calculated
+```
+SELECT SUM(productquantity*productprice)AS	FROM	public.cleaned_data
+```
+- The total revenue of a country is calculated by getting the SUM of all productquantity*productprice GROUP BY country. Then the result is cast to float(2)
+```
+SUM(productquantity*productprice)	AS	float(2)	AS	countryrevenue,
+```
+- The ratio between the revenue of the country and the total revenue of the company is calculated in the SELECTED clause, then that collumn is named revenueratio
+```
+CAST(SUM(productquantity*productprice)/(SELECT SUM(productquantity*productprice)	FROM	public.cleaned_data)*100 AS 	float(2)) AS	revenueratio
+```
+- The result is then sorted by the ratio in decending order
+```
+ORDER BY	revenueratio DESC
+```
+- Final SQL Queries:
+```
+SELECT	DISTINCT	country,
+	CAST(SUM(productquantity*productprice)	AS	float(2)) AS	countryrevenue,
+	CAST(SUM(productquantity*productprice)/(SELECT SUM(productquantity*productprice)AS	totalrevenue	FROM	public.cleaned_data)*100 AS float(2)) AS	revenueratio
+FROM	public.cleaned_data	
+GROUP BY	country
+ORDER BY	revenueratio DESC
+```
+![Result table](https://live.staticflickr.com/65535/53151734659_18b1e1de49_m.jpg)
