@@ -88,7 +88,7 @@ SELECT 	DISTINCT	city,
 FROM	public.cleaned_data
 ORDER BY	city
 ```
-![Result table](https://live.staticflickr.com/65535/53151287620_ed07c150ae_m.jpg)
+![Result table](https://live.staticflickr.com/65535/53151738634_873beb29b4_m.jpg)
 	
 
 
