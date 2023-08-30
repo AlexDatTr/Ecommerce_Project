@@ -153,12 +153,13 @@ ORDER BY	country,
 			totaltransactionpercategory DESC
 	;
 ```
+
 ![Result table](https://live.staticflickr.com/65535/53151957013_713c822177_m.jpg)
 
-# Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
+### Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
 
 
-## SQL Queries:
+- Final SQL Queries:
 
 	-- city and best-selling product
 	WITH	cte AS(
