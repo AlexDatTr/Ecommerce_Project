@@ -81,7 +81,7 @@ AND	allsessions.city !=	'not available in demo dataset'
 AND	allsessions.date <= current_date
 ```
 
-#### Final Data Cleaning and QA Queries
+### Final Data Cleaning and QA Queries
 
 ```
 CREATE	VIEW	cleaned_data	AS
