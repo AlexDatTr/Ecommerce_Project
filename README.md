@@ -1,6 +1,6 @@
-# Final-Project-Transforming-and-Analyzing-Data-with-SQL
+## Final-Project-Transforming-and-Analyzing-Data-with-SQL
 
-## Project/Goals
+### Project/Goals
 
 To clean the dataset, access necessary data to answer the folling questions:
 - Question 1: Which cities and countries have the highest level of transaction revenues on the site?
@@ -14,31 +14,29 @@ To clean the dataset, access necessary data to answer the folling questions:
 
 
 
-## Process
+### Process
 
-### Explore the data and look for the necessary data to answer the question. Some of the finds are:
-#### The data needed are the city, the country, ordered date, product id, product name, product category, product price, product ordered quantity, the chanel the customer get to the site
+- Explore the data and look for the necessary data to answer the question. Some of the finds are:
+	- The data needed are the city, the country, ordered date, product id, product name, product category, product price, product ordered quantity, the chanel the customer get to the site
 
-### Data accessing, cleaning and quality assurance
-#### All the data needed will be collected, cleaned, and quality assured by the querry in cleaning_data.md file
-#### There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by JOIN data from table analytics with the key vitsitor id, visit id, and unit price. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.	
-#### All product price will be assumed as the productprice column in public.allsessions column
-#### There is some row in the allsession table that have city in the wrong country, so country will be change for those row.
-#### Product category column in allsession table is unclear so it will be formated to only contain the category name
-#### Product price will be divided by 1,000,000
-#### A new view with cleaned data will be created
-#### If the quantity is still NULL or equal 0, don't select the row.
-#### All row with unidentified city and country will not be included in the cleaned data
-#### Ordered date have to be before or equal current date
+- Data accessing, cleaning and quality assurance
+	- All the data needed will be collected, cleaned, and quality assured by the querry in cleaning_data.md file
+	- There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by JOIN data from table analytics with the key vitsitor id, visit id, and unit price. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table.	In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions.	
+	- All product price will be assumed as the productprice column in public.allsessions column
+	- There is some row in the allsession table that have city in the wrong country, so country will be change for those row.
+	- Product category column in allsession table is unclear so it will be formated to only contain the category name
+	- Product price will be divided by 1,000,000
+	- A new view with cleaned data will be created
+	- If the quantity is still NULL or equal 0, don't select the row.
+ 	-  All row with unidentified city and country will not be included in the cleaned data
+	- Ordered date have to be before or equal current date
 
-### Answering question by writing queries to analyze cleaned data
+- Answering question by writing queries to analyze cleaned data
 
-## Results
+### Results
 
-### Question 1: Which cities and countries have the highest level of transaction revenues on the site?
-#### Result from calculating the total revenue(productprice*productquantity) from all the transactions in each city and country
-#### Top 3 citis with higest revenue:	https://drive.google.com/file/d/1nrMftZXLk5HFhYhVbZCBIe8WsZJ2bZxH/view?usp=sharing
-#### Top 3 countries with higest revenue:	https://drive.google.com/file/d/1vMrauD8dOD99c6-4YIDWLf3klL7gKQV0/view?usp=sharing\
+- Question 1: Which cities and countries have the highest level of transaction revenues on the site? 
+
 
 ### Question 2: What is the average number of products ordered from visitors in each city and country?
 #### Average number of products ordered from visitors in each city and country:	https://drive.google.com/file/d/1osUZB5lRot-ASERmtSFaqrIuSFGc7W_8/view?usp=drive_link
@@ -73,11 +71,11 @@ To clean the dataset, access necessary data to answer the folling questions:
 #### Answer table:	https://drive.google.com/file/d/1iI07Khm05jyfwMvRKP1sk-cUH1dolPGG/view?usp=drive_link
 
 
-## Challenges 
-### A lot of data in different table of the data is NULL and inconsistent data from different tables of the data set. 
-### Meaning of some attributes are not clear
-### Trouble finding links between tables
+### Challenges 
+- A lot of data in different table of the data is NULL and inconsistent data from different tables of the data set. 
+- Meaning of some attributes are not clear
+- Trouble finding links between tables
 
-## Future Goals
-### Clean data for the whole data set
-### Finding other ways to fill up more NULL data
+### Future Goals
+- Clean data for the whole data set
+- Finding other ways to fill up more NULL data
