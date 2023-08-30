@@ -94,8 +94,23 @@ ORDER BY	city
 
 ### Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
 
-- To count number of transaction in each category in each city
-- The 
+#### To count number of transaction in each category in each city
+- Data is accessd from public.cleaned_data table
+- The number of sale per category for each city and country is calculated by a COUNT in the SELECT clause and GROUP BY city, country, and the product category, the COUNT collumn is then named totaltransactionpercategory
+```
+SELECT	country,
+	city,
+	productcategory,
+	COUNT(productcategory)	AS	totaltransactionpercategory
+FROM	public.cleaned_data
+GROUP BY	city,country,productcategory
+```
+- Then the result is sorted by country, city, and the totaltransactionpercategory in decending order
+```
+ORDER BY	country,
+		city,
+		totaltransactionpercategory	DESC
+```
 - Final SQL Queries:
 ```
 SELECT	country,
@@ -109,7 +124,26 @@ ORDER BY	country,
 		totaltransactionpercategory	DESC
 ;
 ```
-	--To count number of transaction in each category in each country			
+![Result table](https://live.staticflickr.com/65535/53150878962_7a26f1c518_m.jpg)
+
+#### To count number of transaction in each category in each country
+- Data is accessd from public.cleaned_data table
+- The number of sale per category for each city and country is calculated by a COUNT in the SELECT clause and GROUP BY country, and the product category, the COUNT collumn is then named totaltransactionpercategory
+```
+SELECT	country,
+	productcategory,
+	COUNT(productcategory)	AS	totaltransactionpercategory
+FROM	public.cleaned_data
+GROUP BY	country,productcategory
+```
+- Then the result is sorted by country, and the totaltransactionpercategory in decending order
+```
+ORDER BY	country,
+		city,
+		totaltransactionpercategory	DESC
+```
+- Final SQL Queries:
+```			
 	SELECT	country,
 		productcategory,
 		COUNT(productcategory)	AS	totaltransactionpercategory	
@@ -119,12 +153,7 @@ ORDER BY	country,
 			totaltransactionpercategory DESC
 	;
 ```
-## Answer: The first query generates a table with all the city, different category ordered from each city and the total number of products ordered for each of those categories. The second query generate a table with all the country, different category ordered from each country and the total number of products ordered for each of those categories. From there, we can see that most US city ordered most product in Apparel category, when some of the US city also ordered more product from Nest category; by contrast, there is no significant pattern for city in other country. And when looking at the table from second query, it shows that over 36% of the transaction in the US is in Apparel category, 32% of the transaction in the US is in Nest category, and all other categories only share a small percentage of transaction. Besides, there's no significant pattern recognized from other countries.
-
-## Answer table:
-- Number of transaction in each category in each country:	https://drive.google.com/file/d/1YLL6tbsG-6RI1qnKkeBfpLsqdIa5Xyym/view?usp=drive_link
-- Number of transaction in each category in each city:	https://drive.google.com/file/d/16EcikQ498HZxoQ7oInLwtzwR3gUVizdz/view?usp=sharing
-
+![Result table](https://live.staticflickr.com/65535/53151957013_713c822177_m.jpg)
 
 # Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
 
