@@ -226,7 +226,39 @@ WHERE	cte.totalorderedquantity=cte2.maxtotalorderedquantity
 ![Result table](https://live.staticflickr.com/65535/53150920307_bab6d2d715_m.jpg)
 
 #### Country and best-selling product
-
+- Data is accessd from public.cleaned_data table
+- The cte is create to calculated the total number of product sold for each  product product in each city and country, the total collumn is then named totalorderedquantity
+```
+WITH	cte AS(
+	SELECT 	country,
+		productsku,
+		productname,
+		SUM(productquantity) AS	totalorderedquantity
+	FROM	public.cleaned_data
+	GROUP BY	country,
+		productsku,
+		productname
+),
+```
+- Then cte2 is create to accessed data from the first cte. It main job is to get the max number of the totalorderedquantity in the first cte, GROUP  BY country
+```
+cte2 AS(
+	SELECT 	country	AS	country,
+			MAX(cte.totalorderedquantity) AS	maxtotalorderedquantity
+	FROM	cte
+	GROUP BY	country
+)
+```
+- Then the cte2 and cte is INNER JOIN using the city collumn as the key and only select the max number in totalorderedquantity (ie. maxtotalorderedquantity)
+```
+SELECT		cte.country,
+			cte.productsku,
+			cte.productname,
+			cte.totalorderedquantity
+	FROM	cte
+	JOIN	cte2 ON	cte.country=cte2.country
+	WHERE	cte.totalorderedquantity=cte2.maxtotalorderedquantity
+```
 - Final SQL Queries:
 ```
 	
@@ -254,12 +286,7 @@ WHERE	cte.totalorderedquantity=cte2.maxtotalorderedquantity
 	JOIN	cte2 ON	cte.country=cte2.country
 	WHERE	cte.totalorderedquantity=cte2.maxtotalorderedquantity
 ```
-
-
-- Answer: These two queries calculated the total number of quantity ordered for each product, then filter out the product with highest sale for each city and country. There is no significant pattern spotted for the product sold
-## Answer table:
-- City and best-selling product:	https://drive.google.com/file/d/14fm9foWEOSihPfhU9weg2UCR04P2D2PN/view?usp=sharing
-- Country and best-selling product:	https://drive.google.com/file/d/15-AiwcpODmhDjb78SrBf-EjGao8zq1Tk/view?usp=sharing
+![Result table](https://live.staticflickr.com/65535/53151937465_aeb0d68b34_m.jpg)
 	
 
 
