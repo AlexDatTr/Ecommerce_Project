@@ -1,4 +1,4 @@
-## Final-Project-Transforming-and-Analyzing-Data-with-SQL
+## Ecommerce Project
 
 ### Project/Goals
 
