@@ -4,7 +4,7 @@
 CREATE	VIEW	cleaned_data	AS
 ```
  - There are many row in allsession table don't have data for the quantity ordered, so the querry attempts to fill posible quantity data by LEFT JOIN data from table analytics with the key vitsitor id, visit id, and product price. It is assumed that the data from the product quantity is the primary data, so a LEFT JOIN is used to keep all the data from the product quantity collumn.
-```
+```PGSQL
 FROM	public.allsessions
 LEFT	JOIN	public.analytics	
 ON	allsessions.visitorid=analytics.visitorid
@@ -12,18 +12,18 @@ AND	allsessions.visitid=analytics.visitid
 AND	allsessions.productprice=analytics.unitprice
 ```
  - All product price will be assumed as the productprice column in public.allsessions column. For all the row that is NUll in productquantity, the quantity is got from unitprice collumn of puclic.analytics table. In case both of the previous one is NULL, the quantity will be allsessions.totaltransactions/allsessions. This is the SELECT querry for the productquantity
-``` 
+```PGSQL
 COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int))			AS	productquantity
 ```
  - There is some row in the allsession table that have city in the wrong country, so country will be change for those row.
-```
+```PGSQL
 CASE
 WHEN	city='New York'	THEN	CAST('United States' AS varchar(100))
 ELSE	allsessions.country	
 END	AS	country,
 ```
  - Product category column in allsession table is unclear so it will be formated to only contain the category name
-```
+```PGSQL
 CASE	
 WHEN	productcategory	LIKE	'%Nest%'	OR	productname	LIKE	'%Nest%'	THEN	'Nest'
 WHEN	productcategory	LIKE	'%Apparel%'	OR	productname	LIKE	'%Men%'	
@@ -44,7 +44,7 @@ WHEN	productname	LIKE	'%Sunglasses'	THEN	'Apparel'
 END	AS	productcategory
 ```
  - Product price will be divided by 1,000,000
-```
+```PGSQL
 CAST(allsessions.productprice AS	float(2))/1000000 AS	productprice
 ```
  - Component of cleaned data in cleaned_data view
@@ -59,21 +59,21 @@ CAST(allsessions.productprice AS	float(2))/1000000 AS	productprice
 
 ### Quality Assurance
 - If the quantity is still NULL or equal 0, don't select the row. A WHERE clause with COALESCE is used to adress this problem. The query attempt to get the not null value from either the product quantity collumn, the unit sold collumn, or by dividing the total transaction revenue by the productprice. Then check if that value is NULL or equal 0
-```
+```PGSQL
 WHERE 	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS NOT NULL
 	AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
 ```
 - All row with unidentified city and country will not be included in the cleaned data. Another condition will be add to the previous WHERE clause to deal with this problem
-```
+```PGSQL
 AND	allsessions.city !=	'(not set)'
 AND	allsessions.city !=	'not available in demo dataset'
 ```
 - Ordered date have to be before or equal current date. Another condition will be add to the previous WHERE clause to deal with this problem
-```
+```PGSQL
 AND	allsessions.date <= current_date
 ```
 - This summary WHERE clause will be used to do all the above tasks
-```
+```PGSQL
 WHERE	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) IS NOT NULL
 AND	COALESCE(allsessions.productquantity,analytics.unitsold,CAST(allsessions.totaltransactionrevenue/allsessions.productprice	AS	int)) !=0
 AND	allsessions.city !=	'(not set)'
@@ -83,7 +83,7 @@ AND	allsessions.date <= current_date
 
 ### Final Data Cleaning and QA Queries
 
-```
+```PGSQL
 CREATE	VIEW	cleaned_data	AS
 SELECT 	DISTINCT	allsessions.visitorid	AS	visitorid,
 			allsessions.visitid	AS	visitid,
